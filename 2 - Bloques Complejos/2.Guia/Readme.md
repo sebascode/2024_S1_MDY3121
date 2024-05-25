@@ -91,3 +91,62 @@ Debes entregar:
 - Un archivo de texto con la salida generada por los bloques PL/SQL que muestran resultados.
 
 Asegúrate de que tu código esté bien documentado y explicado para facilitar la revisión. ¡Buena suerte, entrenador!
+
+
+```mermaid
+erDiagram
+    TYPES {
+        number id PK
+        varchar type_name
+    }
+    
+    POKEMON {
+        number id PK
+        varchar name
+        number type_id FK
+        number hp
+        number speed
+    }
+    
+    TRAINERS {
+        number id PK
+        varchar name
+    }
+    
+    POKEMON_TYPES {
+        number pokemon_id FK
+        number type_id FK
+    }
+    
+    BATTLES {
+        number id PK
+        number pokemon1_id FK
+        number pokemon2_id FK
+        number winner_id FK
+        date battle_date
+    }
+    
+    POKEMON {
+        number id PK
+        varchar name
+        number type_id FK
+        number hp
+        number speed
+    }
+
+    MOVES {
+        number id PK
+        varchar name
+        number type_id FK
+        number power
+    }
+
+    POKEMON ||--o{ TYPES: "type_id"
+    POKEMON ||--o{ TRAINERS: "trainer_id"
+    POKEMON ||--o{ MOVES: "pokemon_id"
+    POKEMON_TYPES ||--|{ POKEMON: "pokemon_id"
+    POKEMON_TYPES ||--|{ TYPES: "type_id"
+    BATTLES ||--|{ POKEMON: "pokemon1_id"
+    BATTLES ||--|{ POKEMON: "pokemon2_id"
+    BATTLES ||--|{ POKEMON: "winner_id"
+```
